@@ -1,0 +1,96 @@
+{extend name="base" /}
+{block name="body"}
+<div id="content-container">
+    <div id="page-content">
+        <div id="page-title">
+            <h1 class="page-header text-overflow">添加导航</h1>
+        </div>
+        <div class="panel animated fadeInUp">
+            <div class="panel-body">
+                <form class="form-horizontal layui-form" action="{:url('admin/navigation/save')}" method="post">
+                    <div class="panel-body">
+                        <a data-title="返回" href="{:url('admin/navigation/index')}" class="layui-btn layui-btn-small add-action">
+                            <i class="layui-icon">&#xe603;</i> 返回
+                        </a>
+                        <hr>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="demo-is-inputsmall">上级导航</label>
+                            <div class="col-sm-6">
+                                <select name="pid" lay-verify="required">
+                                    <option value="0">一级导航</option>
+                                    {foreach name="nav_level_list" item="vo"}
+                                    <option value="{$vo.id}" {if condition="$pid==$vo.id"} selected="selected"{/if}>{neq name="vo.level" value="1"}|{php}for($i=1;$i<$vo['level'];$i++){echo ' ----';}{/php}{/neq} {$vo.name}</option>
+                                    {/foreach}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="demo-is-inputnormal" class="col-sm-3 control-label">导航名称</label>
+                            <div class="col-sm-6">
+                                <input type="text" name="name" value="" required  lay-verify="required" placeholder="请输入导航名称" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="demo-is-inputlarge" class="col-sm-3 control-label">导航别名</label>
+                            <div class="col-sm-6">
+                                <input type="text" name="alias" value=""  placeholder=" (选填) 请输入导航别名" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="demo-is-inputlarge" class="col-sm-3 control-label">导航链接</label>
+                            <div class="col-sm-6">
+                                <input type="text" name="link" value=""  placeholder=" (选填) 请输入导航链接" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">图标</label>
+                            <div class="col-sm-3">
+                                <input type="text" name="icon" value="" placeholder="（选填）如：fa fa-home" class="layui-input">
+                            </div>
+                            <div class="col-sm-3">
+                                <a class="layui-btn layui-btn-primary show-icon"><i class=""></i></a>
+                                <a class="layui-btn layui-btn-primary select-icon"><i class="glyphicon glyphicon-search"></i> 选择图标</a>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">状态</label>
+                            <div class="col-sm-6">
+                                <input type="radio" name="status" value="1" title="启用" checked="checked">
+                                <input type="radio" name="status" value="0" title="禁用">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">打开方式</label>
+                            <div class="col-sm-6">
+                                <input type="radio" name="target" value="_self" title="当前窗口" checked="checked">
+                                <input type="radio" name="target" value="_blank" title="新窗口">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="demo-is-inputnormal" class="col-sm-3 control-label">排序</label>
+                            <div class="col-sm-6">
+                                <input type="text" name="sort" value="0" required  lay-verify="required" placeholder="" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-sm-9 col-sm-offset-3">
+                                <button class="layui-btn" lay-submit lay-filter="*" data-loading-text="保存中...">保存</button>
+                                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        //定义全局JS对象
+        var GL = {
+            current_controller: "admin/{$controller|default=''}/"
+        };
+        create_element('js', '/static/js/modules/admin.js');
+    </script>
+</div>
+{/block}

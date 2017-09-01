@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{$site.site_title}</title>
+    <meta name="keywords" content="{$site.seo_keyword}"/>
+    <meta name="description" content="{$site.seo_description}"/>
+    <link href="/static/lib/uikit-3.0/css/uikit.min.css" rel="stylesheet">
+    <link href="/static/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/static/lib/nprogress/nprogress.css" rel="stylesheet">
+    <link href="/static/css/index.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+{include file="inc/header" /}
+<div class="uk-container uk-container-small uk-position-relative">
+    <div class="uk-grid-medium uk-child-width-expand@s" uk-grid>
+        <div class="uk-width-4-4@m"  id="content-container">
+            <div class="uk-animation-slide-bottom-small">
+                {foreach name="articleList" item="vo"}
+                <div class="uk-card uk-card-default uk-card-body uk-margin-large-bottom ">
+                    <article class="uk-article">
+                        <h1 class="uk-article-title uk-margin-center">
+                            <a class="uk-link-reset" href="/news/{$vo.id}">{$vo.title}</a>
+                        </h1>
+                        <p class="uk-article-meta uk-margin-center">
+                            <i class="fa fa-clock-o fa-lg"></i> 发表于 {$vo.publish_time}
+                            <span> | </span>
+                            <i class="fa fa-eye fa-lg"></i> 阅读次数 {$vo.reading}
+                        </p>
+                        <div uk-lightbox class="uk-margin-center">
+                            <a class="uk-inline" href="{$vo.thumb}">
+                                <img src="{$vo.thumb}">
+                            </a>
+                        </div>
+                        <p class="uk-text-lead">{$vo.introduction}</p>
+
+                        <div class="uk-margin-center">
+                            <a class="uk-button uk-button-text" href="/news/{$vo.id}">阅读全文</a>
+                        </div>
+                        <hr>
+                        {php}
+                        if(!empty($vo['tags'][0])):
+                            foreach($vo['tags'] as $v){
+                                {/php}
+                                <span class="uk-label"><i class="fa fa-tags"> {$v}</i></span>
+                                {php}
+                            }
+                        endif;
+                        {/php}
+                    </article>
+                </div>
+                {/foreach}
+            </div>
+            {$page}
+        </div>
+    </div>
+</div>
+{include file="inc/footer" /}

@@ -1,0 +1,71 @@
+{extend name="base" /}
+{block name="body"}
+<div id="content-container">
+    <div id="page-content">
+        <div id="page-title">
+            <h1 class="page-header text-overflow">个人资料管理</h1>
+        </div>
+        <div class="panel animated fadeInUp">
+            <div class="panel-body">
+                <form class="form-horizontal layui-form" action="{:url('admin/admin_user/updateProfile')}" method="post">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label for="demo-is-inputnormal" class="col-sm-3 control-label">头像</label>
+                            <div class="col-sm-3">
+                                <div class="avatar-upload">
+                                    <img id="avatar_upload" src='{$admin_user.avatar ?: "/static/images/avatar.png"}'>
+                                    <div class="avatar-upbar">
+                                        <input type="file" name="images" class="layui-upload-file">
+                                        <input type="hidden" name="avatar" value="{$admin_user.avatar}" id="avatar">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="demo-is-inputnormal" class="col-sm-3 control-label">管理员名称</label>
+                            <div class="col-sm-3">
+                                <input type="text" name="username" value="{$admin_user.username}" required  lay-verify="required" placeholder="请输入管理员名称" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="demo-is-inputlarge" class="col-sm-3 control-label">旧密码</label>
+                            <div class="col-sm-3">
+                                <input type="password" name="old_password" value=""  placeholder="如不修改密码则留空" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="demo-is-inputlarge" class="col-sm-3 control-label">新密码</label>
+                            <div class="col-sm-3">
+                                <input type="password" name="password" value=""  placeholder="(选填) 如不修改则留空" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="demo-is-inputlarge" class="col-sm-3 control-label">重复新密码</label>
+                            <div class="col-sm-3">
+                                <input type="password" name="confirm_password" value=""  placeholder="(选填) 如不修改则留空" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-sm-9 col-sm-offset-3">
+                                <input type="hidden" name="id" value="{$admin_user.id}">
+                                <button class="layui-btn" lay-submit lay-filter="*" data-loading-text="更新中..." isreload="true">更新</button>
+                                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        //定义全局JS对象
+        var GL = {
+            current_controller: "admin/default/"
+        };
+        create_element('js', '/static/js/modules/admin.js');
+        create_element('js', '/static/js/modules/upload.js');
+    </script>
+</div>
+{/block}

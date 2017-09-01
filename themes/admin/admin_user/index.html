@@ -1,0 +1,70 @@
+{extend name="base" /}
+{block name="body"}
+<div id="content-container">
+    <div id="page-content">
+        <div id="page-title">
+            <h1 class="page-header text-overflow">系统管理员管理</h1>
+            <div class="searchbox">
+                <div class="input-group custom-search-form">
+                    <input type="text" class="form-control" placeholder="Search..">
+                    <span class="input-group-btn">
+                        <button class="text-muted" type="button"><i class="fa fa-search"></i></button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="row animated fadeInUp">
+            <div class="panel">
+                <div class="panel-body layui-form">
+                    <a data-title="添加管理员" href="{:url('admin/admin_user/add')}" class="layui-btn layui-btn-small add-action">
+                        <i class="layui-icon">&#xe608;</i> 添加管理员
+                    </a>
+                    <table class="layui-table table table-striped table-bordered">
+                        <colgroup>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th>管理员名称</th>
+                            <th>权限组</th>
+                            <th class="mobile-table">最后登录时间</th>
+                            <th class="mobile-table">最后登录IP</th>
+                            <th class="mobile-table">状态</th>
+                            <th width="10%">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {foreach name="admin_user_list" item="vo"}
+                        <tr>
+                            <td>{$vo.username}</td>
+                            <td>{$vo.title}</td>
+                            <td class="mobile-table">{$vo.last_login_time}</td>
+                            <td class="mobile-table">{$vo.last_login_ip}</td>
+                            <td class="mobile-table"><input type="checkbox" name="status" data-url="{:url('admin/admin_user/switchStatus')}" lay-skin="switch" lay-text="启用|禁用" lay-filter="status" value="{$vo['id']}" {php}echo $vo['status']==1 ? 'checked' : '';{/php}></td>
+                            <td>
+                                <a href="{:url('admin/admin_user/edit', ['id'=>$vo['id']])}" class="layui-btn layui-btn-normal layui-btn-mini">编辑</a>
+                                <button href="{:url('admin/admin_user/delete', ['id'=>$vo['id']])}" class="layui-btn layui-btn-danger layui-btn-mini delete-action">删除</button>
+                            </td>
+                        </tr>
+                        {/foreach}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        //定义全局JS对象
+        var GL = {
+            current_controller: "admin/{$controller|default=''}/"
+        };
+        create_element('js', '/static/js/modules/admin.js');
+    </script>
+</div>
+{/block}

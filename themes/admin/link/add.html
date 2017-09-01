@@ -1,0 +1,78 @@
+{extend name="base" /}
+{block name="body"}
+<div id="content-container">
+    <div id="page-content">
+        <div id="page-title">
+            <h1 class="page-header text-overflow">添加链接</h1>
+        </div>
+        <div class="panel animated fadeInUp">
+            <div class="panel-body">
+                <form class="form-horizontal layui-form" action="{:url('admin/link/save')}" method="post">
+                    <div class="panel-body">
+                        <a data-title="返回" href="{:url('admin/link/index')}" class="layui-btn layui-btn-small add-action">
+                            <i class="layui-icon">&#xe603;</i> 返回
+                        </a>
+                        <hr>
+                        <div class="form-group">
+                            <label for="demo-is-inputnormal" class="col-sm-3 control-label">链接名称</label>
+                            <div class="col-sm-6">
+                                <input type="text" name="name" value="" required  lay-verify="required" placeholder="请输入链接名称" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="demo-is-inputlarge" class="col-sm-3 control-label">链接</label>
+                            <div class="col-sm-6">
+                                <input type="text" name="link" value="" placeholder=" (选填) 请输入链接" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="demo-is-inputlarge" class="col-sm-3 control-label">缩略图</label>
+                            <div class="col-sm-3">
+                                <div class="thumb-upload">
+                                    <div class="layui-progress" lay-showPercent="yes" lay-filter="thumb"></div>
+                                    <img id="thumb_upload" src='/static/images/background.png'>
+                                    <div class="thumb-upbar">
+                                        <a id="start_upload" class="layui-btn layui-btn-primary">
+                                            <i class="layui-icon">&#xe62f;</i>
+                                        </a>
+                                        <input type="hidden" name="thumb" value="" id="name_thumb">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">状态</label>
+                            <div class="col-sm-6">
+                                <input type="radio" name="status" value="1" title="显示" checked="checked">
+                                <input type="radio" name="status" value="0" title="隐藏">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="demo-is-inputnormal" class="col-sm-3 control-label">排序</label>
+                        <div class="col-sm-6">
+                            <input type="text" name="sort" value="0" required  lay-verify="required" placeholder="" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-sm-9 col-sm-offset-3">
+                                <button class="layui-btn" lay-submit lay-filter="*" data-loading-text="保存中...">保存</button>
+                                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        //定义全局JS对象
+        var GL = {
+            current_controller: "admin/{$controller|default=''}/"
+        };
+        create_element('js', '/static/js/modules/admin.js');
+        create_element('js', '/static/js/modules/upload.js');
+    </script>
+</div>
+{/block}

@@ -1,0 +1,68 @@
+{extend name="base" /}
+{block name="body"}
+<div id="content-container">
+    <div id="page-content">
+        <div id="page-title">
+            <h1 class="page-header text-overflow">系统日志管理</h1>
+            <div class="searchbox">
+                <div class="input-group custom-search-form">
+                    <input type="text" class="form-control" placeholder="Search..">
+                    <span class="input-group-btn">
+                        <button class="text-muted" type="button"><i class="fa fa-search"></i></button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="row  animated fadeInUp">
+            <div class="panel">
+                <div class="panel-body layui-form">
+                    <button data-title="批量删除" href="{:url('admin/log/delete')}" class="layui-btn layui-btn-small layui-btn-danger batch-action mobile-table">
+                        <i class="layui-icon">&#xe640;</i> 批量删除
+                    </button>
+                    <table class="layui-table table table-striped table-bordered">
+                        <colgroup>
+                            <col width="50">
+                            <col width="80">
+                            <col>
+                            <col>
+                            <col>
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th class="mobile-table"><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose"></th>
+                            <th>操作者</th>
+                            <th class="mobile-table">节点</th>
+                            <th>行为</th>
+                            <th>操作内容</th>
+                            <th>ip地址</th>
+                            <th width="18%">操作时间</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {foreach name="log_list" item="vo"}
+                            <tr>
+                                <td class="mobile-table"><input type="checkbox" name="ids" lay-skin="primary" value="{$vo.id}"></td>
+                                <td>{$vo.username}</td>
+                                <td class="mobile-table">{$vo.node}</td>
+                                <td>{$vo.action}</td>
+                                <td>{$vo.content}</td>
+                                <td>{$vo.isp}</td>
+                                <td>{$vo.create_at}</td>
+                            </tr>
+                            {/foreach}
+                        </tbody>
+                    </table>
+                    <div class="float-right">{$page}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        //定义全局JS对象
+        var GL = {
+            current_controller: "admin/{$controller|default=''}/"
+        };
+        create_element('js', '/static/js/modules/admin.js');
+    </script>
+</div>
+{/block}

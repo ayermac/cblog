@@ -1,0 +1,64 @@
+{extend name="base" /}
+{block name="body"}
+<div id="content-container">
+    <div id="page-content">
+        <div id="page-title">
+            <h1 class="page-header text-overflow">系统权限组管理</h1>
+            <div class="searchbox">
+                <div class="input-group custom-search-form">
+                    <input type="text" class="form-control" placeholder="Search..">
+                    <span class="input-group-btn">
+                        <button class="text-muted" type="button"><i class="fa fa-search"></i></button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="row animated fadeInUp">
+            <div class="panel">
+                <div class="panel-body layui-form">
+                    <a data-title="添加权限组" href="{:url('admin/auth_group/add')}" class="layui-btn layui-btn-small add-action">
+                        <i class="layui-icon">&#xe608;</i> 添加权限组
+                    </a>
+                    <table class="layui-table table table-striped table-bordered">
+                        <colgroup>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th>权限组名称</th>
+                            <th>权限组描述</th>
+                            <th class="mobile-table">状态</th>
+                            <th width="15%">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {foreach name="auth_group_list" item="vo"}
+                        <tr>
+                            <td>{$vo.title}</td>
+                            <td>{$vo.description}</td>
+                            <td class="mobile-table"><input type="checkbox" name="status" data-url="{:url('admin/auth_group/switchStatus')}" lay-skin="switch" lay-text="启用|禁用" lay-filter="status" value="{$vo.id}" {php}echo $vo['status'] == 1 ? 'checked' : ''{/php}></td>
+                            <td>
+                                <a href="{:url('admin/auth_group/auth', ['id'=>$vo['id']])}" class="layui-btn layui-btn-mini">授权</a>
+                                <a href="{:url('admin/auth_group/edit', ['id'=>$vo['id']])}" class="layui-btn layui-btn-normal layui-btn-mini">编辑</a>
+                                <button href="{:url('admin/auth_group/delete', ['id'=>$vo['id']])}" class="layui-btn layui-btn-danger layui-btn-mini delete-action">删除</button>
+                            </td>
+                        </tr>
+                        {/foreach}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        //定义全局JS对象
+        var GL = {
+            current_controller: "admin/{$controller|default=''}/"
+        };
+        create_element('js', '/static/js/modules/admin.js');
+    </script>
+</div>
+{/block}

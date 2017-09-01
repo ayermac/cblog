@@ -1,0 +1,47 @@
+<nav class="uk-navbar-container uk-margin-large-bottom" uk-navbar>
+    <div class="uk-navbar-center">
+        <!--<a class="uk-navbar-item uk-logo" href="#"></a>-->
+        <ul class="uk-navbar-nav">
+            {foreach name="navList" item="vo"}
+            {if condition="isset($vo['children'])"}
+            <li>
+                <a href="{$vo.link}" target="{$vo.target}"><i class="{$vo.icon}"></i> {$vo.name}</a>
+                <div class="uk-navbar-dropdown">
+                    <ul class="uk-nav uk-navbar-dropdown-nav">
+                        {foreach name="vo['children']" item="v"}
+                        <li><a href="{$v.link}" target="{$v.target}"><i class="{$v.icon}"></i> {$v.name}</a></li>
+                        {/foreach}
+                    </ul>
+                </div>
+            </li>
+            {else /}
+            <li><a href="{$vo.link}" target="{$vo.target}"><i class="{$vo.icon}"></i> {$vo.name}</a></li>
+            {/if}
+            {/foreach}
+        </ul>
+        <!--<a class="uk-navbar-toggle uk-hidden@s" href="#" uk-toggle="target: #offcanvas-nav-primary">-->
+            <!--<span uk-navbar-toggle-icon></span> <span class="uk-margin-small-left">菜单</span>-->
+        <!--</a>-->
+    </div>
+</nav>
+<div id="offcanvas-nav-primary" uk-offcanvas="mode: push; overlay: true">
+    <div class="uk-offcanvas-bar uk-flex uk-flex-column">
+        <button class="uk-offcanvas-close" type="button" uk-close></button>
+        <ul class="uk-nav uk-nav-primary uk-nav-center uk-margin-auto-vertical">
+            {foreach name="navList" item="vo"}
+            {if condition="isset($vo['children'])"}
+            <li class="uk-parent">
+                <a href="{$vo.link}" target="{$vo.target}"><i class="{$vo.icon}"></i> {$vo.name}</a>
+                <ul class="uk-nav-sub">
+                    {foreach name="vo['children']" item="v"}
+                    <li><a href="{$v.link}" target="{$v.target}"><i class="{$v.icon}"></i> {$v.name}</a></li>
+                    {/foreach}
+                </ul>
+            </li>
+            {else /}
+            <li class="uk-active"><a href="{$vo.link}" target="{$vo.target}">{$vo.name}</a></li>
+            {/if}
+            {/foreach}
+        </ul>
+    </div>
+</div>

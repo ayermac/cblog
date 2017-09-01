@@ -1,0 +1,98 @@
+{extend name="base" /}
+{block name="body"}
+<div id="content-container">
+    <div id="page-content">
+        <div id="page-title">
+            <h1 class="page-header text-overflow">文章管理</h1>
+        </div>
+        <div class="row">
+            <div class="panel">
+                <div class="panel-body">
+                    <form data-pjax class="layui-form layui-form-pane" action="{:url('admin/article/index')}" method="get">
+                        <div class="layui-inline">
+                            <div class="layui-input-inline">
+                                <select name="cid">
+                                    <option value="0">请选择文章分类</option>
+                                    {foreach name="category_level_list" item="vo"}
+                                    <option value="{$vo.id}" {if condition="$cid==$vo.id"} selected="selected"{/if}>{neq name="vo.level" value="1"}|{php}for($i=1;$i<$vo['level'];$i++){echo ' ----';}{/php}{/neq} {$vo.name}</option>
+                                    {/foreach}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <div class="layui-input-inline">
+                                <input type="text" name="keyword" value="{$keyword}" placeholder="请输入关键词" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <button class="layui-btn pjax-btn" type="submit">搜索</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="row animated fadeInUp">
+            <div class="panel">
+                <div class="panel-body layui-form">
+                    <a data-title="添加文章" href="{:url('admin/article/add')}" class="layui-btn layui-btn-small add-action">
+                        <i class="layui-icon">&#xe608;</i> 添加文章
+                    </a>
+                    <button type="button" class="layui-btn layui-btn-small batch-action mobile-table" href="{:url('admin/article/toggle',['type'=>'audit'])}">审核</button>
+                    <button type="button" class="layui-btn layui-btn-warm layui-btn-small batch-action mobile-table" href="{:url('admin/article/toggle',['type'=>'cancel_audit'])}">取消审核</button>
+                    <button data-title="批量删除" href="{:url('admin/article/delete')}" class="layui-btn layui-btn-small layui-btn-danger batch-action mobile-table">
+                        <i class="layui-icon">&#xe640;</i> 批量删除
+                    </button>
+                    <table class="layui-table table table-striped table-bordered">
+                        <colgroup>
+                            <col width="50">
+                            <col width="50">
+                            <col>
+                            <col>
+                            <col>
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th class="mobile-table"><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose"></th>
+                            <th class="mobile-table"><button class="layui-btn layui-btn-normal layui-btn-mini list-sorting" data-url="{:url('admin/article/sorting')}">排 序</button></th>
+                            <th>文章标题</th>
+                            <th class="mobile-table">文章分类</th>
+                            <th class="mobile-table">作者</th>
+                            <th class="mobile-table">阅读量</th>
+                            <th class="mobile-table">状态</th>
+                            <th class="mobile-table">发布时间</th>
+                            <th width="15%">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {foreach name="article_list" item="vo"}
+                        <tr>
+                            <td class="mobile-table"><input type="checkbox" name="ids" lay-skin="primary" value="{$vo.id}"></td>
+                            <td class="mobile-table"><input type="text" name="sort" autocomplete="off" class="list-sort-input" value="{$vo.sort}" data-id="{$vo.id}"></td>
+                            <td>{$vo.title}</td>
+                            <td class="mobile-table">{$category_list[$vo['cid']]}</td>
+                            <td class="mobile-table">{$vo.author}</td>
+                            <td class="mobile-table">{$vo.reading}</td>
+                            <td class="mobile-table">{php}echo $vo['status']==1? '已审核' : '未审核'{/php}</td>
+                            <td class="mobile-table">{$vo.publish_time}</td>
+                            <td>
+                                <a href="{:url('admin/article/edit', ['id'=>$vo['id']])}" class="layui-btn layui-btn-normal layui-btn-mini">编辑</a>
+                                <button href="{:url('admin/article/delete', ['id'=>$vo['id']])}" class="layui-btn layui-btn-danger layui-btn-mini delete-action">删除</button>
+                            </td>
+                        </tr>
+                        {/foreach}
+                        </tbody>
+                    </table>
+                    <div class="float-right">{$page}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        //定义全局JS对象
+        var GL = {
+            current_controller: "admin/{$controller|default=''}/"
+        };
+        create_element('js', '/static/js/modules/admin.js');
+    </script>
+</div>
+{/block}

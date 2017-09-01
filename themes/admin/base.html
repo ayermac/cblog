@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CBlog - Admin</title>
+    
+    <link href="/static/lib/summernote/summernote.css" rel="stylesheet">
+    <link href="/static/lib/layui/css/layui.css" rel="stylesheet">
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/nifty.min.css" rel="stylesheet">
+    <link href="/static/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/static/lib/nprogress/nprogress.css" rel="stylesheet">
+    <link href="/static/lib/animate-css/animate.min.css" rel="stylesheet">
+    <link href="/static/lib/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
+    <link href="/static/css/common.css" rel="stylesheet">
+    <!--JAVASCRIPT-->
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/lib/nprogress/nprogress.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/nifty.min.js"></script>
+    <script src="/static/js/jquery.pjax.js"></script>
+    <script src="/static/lib/layui/layui.js"></script>
+    <script src="/static/lib/summernote/summernote.min.js"></script>
+    <script src="/static/lib/summernote/lang/summernote-zh-CN.min.js"></script>
+    <script src="/static/lib/plupload/plupload.full.min.js"></script>
+    <script src="/static/lib/sweetalert2/dist/sweetalert2.min.js"></script>
+    <script src="/static/js/echarts.js"></script>
+    <script src="/static/js/common.js"></script>
+</head>
+
+<body>
+<div id="container" class="effect aside-float aside-bright mainnav-lg">
+    <!--头部-->
+    <header id="navbar">
+        <div id="navbar-container" class="boxed">
+            <div class="navbar-header">
+                <a href="/admin/index.html" class="navbar-brand">
+                    <img src="/static/images/logo.png" alt="Logo" class="brand-icon">
+                    <div class="brand-title">
+                        <span class="brand-text">CBlog</span>
+                    </div>
+                </a>
+            </div>
+            <div class="navbar-content clearfix">
+                <ul class="nav navbar-top-links pull-left">
+                    <li class="tgl-menu-btn">
+                        <a class="mainnav-toggle" href="#">
+                            <i class="fa fa-bars"></i>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-top-links pull-right">
+                    <li class="dropdown">
+                        <a class="refresh" href="#" data-tips-text="清除缓存" data-url="{:url('admin/system/clear')}">
+                            <span class="glyphicon glyphicon-refresh"></span>
+                        </a>
+                    </li>
+                    <li id="dropdown-user" class="dropdown">
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle text-right">
+                                <span class="pull-right">
+                                    <i class="fa fa-user-o fa-2x ic-user"></i>
+                                </span>
+                            <div class="username hidden-xs">{$adminInfo.username}</div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-md dropdown-menu-right panel-default">
+                            <ul class="head-list">
+                                <li>
+                                    <a href="{:url('admin/AdminUser/profile', ['id' => $adminInfo.id])}">
+                                        <i class="fa fa-user-o icon-lg icon-fw"></i>个人资料
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="pad-all text-right">
+                                <a href="{:url('admin/login/logout')}" class="btn btn-primary">
+                                    <i class="fa fa-unlock-alt"></i> 退出登录
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <div class="boxed">
+
+        <!--内容主体-->
+        {block name="body"}{/block}
+
+        <!--导航栏-->
+        <nav id="mainnav-container">
+            <div id="mainnav">
+                <div id="mainnav-menu-wrap">
+                    <div class="nano">
+                        <div class="nano-content">
+                            <div id="mainnav-profile" class="mainnav-profile">
+                                <div class="profile-wrap">
+                                    <div class="pad-btm">
+                                        <a href="{:url('admin/AdminUser/profile', ['id' => $adminInfo.id])}">
+                                            <img class="img-circle img-md img-border" src="{$adminInfo.avatar ?: '/static/images/avatar.png'}" alt="Profile Picture">
+                                        </a>
+                                    </div>
+                                    <a href="#" class="box-block" data-toggle="collapse" aria-expanded="false">
+                                        <p class="mnp-name">Welcome {$adminInfo.username}</p>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <ul id="mainnav-menu" class="list-group">
+                                <li class="active-link">
+                                    <a href="/admin/index/index">
+                                        <i class="fa fa-home"></i>
+                                        <span class="menu-title">
+                                            <strong>首页</strong>
+                                        </span>
+                                    </a>
+                                </li>
+                                {foreach name="menu" item="vo"}
+                                {if condition="isset($vo['children'])"}
+                                    <li class="first-menu">
+                                        <a href="javascript:;">
+                                            <i class="{$vo.icon}"></i>
+                                            <span class="menu-title">
+                                                <strong>{$vo.title}</strong>
+                                            </span>
+                                            <i class="arrow"></i>
+                                        </a>
+
+                                        <ul class="collapse">
+                                            {foreach name="vo['children']" item="v"}
+                                            <li><a href="{:url($v.name)}">{$v.title}</a></li>
+                                            {/foreach}
+                                        </ul>
+                                    </li>
+                                {else /}
+                                    <li>
+                                        <a href="{:url($vo.name)}">
+                                            <i class="{$vo.icon}"></i>
+                                            <span class="menu-title">
+                                                <strong>{$vo.title}</strong>
+                                            </span>
+                                        </a>
+                                    </li>
+                                {/if}
+                                {/foreach}
+                                <li class="list-divider"></li>
+                            </ul>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </nav>
+    </div>
+    <!--尾部-->
+    <footer id="footer">
+        <div class="show-fixed pull-right">
+            You have <a href="#" class="text-bold text-main"><span class="label label-danger">3</span> pending action.</a>
+        </div>
+        <div class="hide-fixed pull-right pad-rgt">
+        </div>
+        <p class="pad-lft">&#0169; 2017</p>
+    </footer>
+    <!--滑到顶部按钮-->
+    <button class="scroll-top btn">
+        <i class="pci-chevron chevron-up"></i>
+    </button>
+</div>
+</body>
+</html>

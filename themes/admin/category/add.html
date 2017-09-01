@@ -1,0 +1,85 @@
+{extend name="base" /}
+{block name="body"}
+<div id="content-container">
+    <div id="page-content">
+        <div id="page-title">
+            <h1 class="page-header text-overflow">添加分类</h1>
+        </div>
+        <div class="panel animated fadeInUp">
+            <div class="panel-body">
+                <form class="form-horizontal layui-form" action="{:url('admin/category/save')}" method="post">
+                    <div class="panel-body">
+                        <a data-title="返回" href="{:url('admin/category/index')}" class="layui-btn layui-btn-small add-action">
+                            <i class="layui-icon">&#xe603;</i> 返回
+                        </a>
+                        <hr>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="demo-is-inputsmall">上级分类</label>
+                            <div class="col-sm-6">
+                                <select name="pid" lay-verify="required">
+                                    <option value="0">一级分类</option>
+                                    {foreach name="category_level_list" item="vo"}
+                                    <option value="{$vo.id}" {if condition="$pid==$vo.id"} selected="selected"{/if}>{neq name="vo.level" value="1"}|{php}for($i=1;$i<$vo['level'];$i++){echo ' ----';}{/php}{/neq} {$vo.name}</option>
+                                    {/foreach}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="demo-is-inputnormal" class="col-sm-3 control-label">分类名称</label>
+                            <div class="col-sm-6">
+                                <input type="text" name="name" value="" required  lay-verify="required" placeholder="请输入分类名称" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="demo-is-inputlarge" class="col-sm-3 control-label">SEO标题</label>
+                            <div class="col-sm-6">
+                                <input type="text" name="seotitle" value=""  placeholder="" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="demo-is-inputlarge" class="col-sm-3 control-label">SEO关键词</label>
+                            <div class="col-sm-6">
+                                <input type="text" name="seokeys" value=""  placeholder="" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="demo-is-inputlarge" class="col-sm-3 control-label">SEO描述</label>
+                            <div class="col-sm-6">
+                                <textarea placeholder="请输入内容" class="layui-textarea" name="seodesc"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">类型</label>
+                            <div class="col-sm-6">
+                                <input type="radio" name="type" value="1" title="列表" checked="checked">
+                                <input type="radio" name="type" value="2" title="单页">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="demo-is-inputnormal" class="col-sm-3 control-label">排序</label>
+                            <div class="col-sm-6">
+                                <input type="text" name="sort" value="0" required  lay-verify="required" placeholder="" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-sm-9 col-sm-offset-3">
+                                <button class="layui-btn" lay-submit lay-filter="*" data-loading-text="保存中...">保存</button>
+                                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        //定义全局JS对象
+        var GL = {
+            current_controller: "admin/{$controller|default=''}/"
+        };
+        create_element('js', '/static/js/modules/admin.js');
+    </script>
+</div>
+{/block}

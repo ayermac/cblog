@@ -1,0 +1,69 @@
+{extend name="base" /}
+{block name="body"}
+<div id="content-container">
+    <div id="page-content">
+        <div id="page-title">
+            <h1 class="page-header text-overflow">导航管理</h1>
+            <div class="searchbox">
+                <div class="input-group custom-search-form">
+                    <input type="text" class="form-control" placeholder="Search..">
+                    <span class="input-group-btn">
+                        <button class="text-muted" type="button"><i class="fa fa-search"></i></button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="row animated fadeInUp">
+            <div class="panel">
+                <div class="panel-body layui-form">
+                    <a data-title="添加导航" href="{:url('admin/navigation/add')}" class="layui-btn layui-btn-small add-action">
+                        <i class="layui-icon">&#xe608;</i> 添加导航
+                    </a>
+                    <table class="layui-table table table-striped table-bordered">
+                        <colgroup>
+                            <col width="50">
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th class="mobile-table"><button class="layui-btn layui-btn-normal layui-btn-mini list-sorting" data-url="{:url('admin/navigation/sorting')}">排 序</button></th>
+                            <th width="50px" class="mobile-table">图标</th>
+                            <th>导航名称</th>
+                            <th class="mobile-table">导航链接</th>
+                            <th class="mobile-table">状态</th>
+                            <th width="18%">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {foreach name="nav_level_list" item="vo"}
+                        <tr>
+                            <td class="mobile-table"><input type="text" name="sort" autocomplete="off" class="list-sort-input" value="{$vo.sort}" data-id="{$vo.id}"></td>
+                            <td class="mobile-table"><i class="{$vo.icon} fa-lg"></i></td>
+                            <td>{neq name="vo.level" value="1"}|{php}for($i=1;$i<$vo['level'];$i++){echo ' ----';}{/php}{/neq} {$vo.name}</td>
+                            <td class="mobile-table">{$vo.link}</td>
+                            <td class="mobile-table"><input type="checkbox" name="status" data-url="{:url('admin/navigation/switchStatus')}" lay-skin="switch" lay-text="启用|禁用" lay-filter="status" value="{$vo['id']}" {php}echo $vo['status']==1 ? 'checked' : '';{/php}></td>
+                            <td>
+                                <a href="{:url('admin/navigation/add',['pid'=>$vo['id']])}" class="layui-btn layui-btn-mini">添加子导航</a>
+                                <a href="{:url('admin/navigation/edit', ['id'=>$vo['id']])}" class="layui-btn layui-btn-normal layui-btn-mini">编辑</a>
+                                <button href="{:url('admin/navigation/delete', ['id'=>$vo['id']])}" class="layui-btn layui-btn-danger layui-btn-mini delete-action">删除</button>
+                            </td>
+                        </tr>
+                        {/foreach}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        //定义全局JS对象
+        var GL = {
+            current_controller: "admin/{$controller|default=''}/"
+        };
+        create_element('js', '/static/js/modules/admin.js');
+    </script>
+</div>
+{/block}

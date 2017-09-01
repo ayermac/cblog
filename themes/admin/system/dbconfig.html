@@ -1,0 +1,35 @@
+{extend name="base" /}
+{block name="body"}
+<div id="content-container">
+    <div id="page-content">
+        <div id="page-title">
+            <h1 class="page-header text-overflow">数据库配置</h1>
+        </div>
+        <div class="panel">
+            <div class="panel-body  animated fadeInUp form-horizontal">
+                <a data-title="" href="{:url('admin/system/siteconfig')}" class="layui-btn layui-btn-small add-action">站点配置</a>
+                <div class="form-group">
+                    <label for="demo-is-inputnormal" class="col-sm-2 control-label">备份数据库，路径为/sql</label>
+                    <div class="col-sm-8">
+                        <button class="layui-btn api-action" type="button" action-url="{:url('/api/crontab/dumpSql')}">备份</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="demo-is-inputnormal" class="col-sm-2 control-label">同步文章阅读数</label>
+                    <div class="col-sm-8">
+                        <button class="layui-btn api-action" type="button" action-url="{:url('/api/crontab/SyncReading')}">同步</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        //定义全局JS对象
+        var GL = {
+            current_controller: "admin/{$controller|default=''}/"
+        };
+        create_element('js', '/static/js/modules/admin.js');
+    </script>
+</div>
+{/block}
