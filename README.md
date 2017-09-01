@@ -1,6 +1,7 @@
 CBlog
 ===============
-* **CBlog**  是一个基于ThinkPHP5开发的博客系统，刚开发完不久，现在主要用于个人博客。
+* **CBlog**  是一个基于ThinkPHP5开发的博客系统。
+* 演示: 个人博客[http://www.totoroc.cn/](http://www.totoroc.cn/)
 * **CBlog** 后台是一个通用的后台系统，拥有完整的权限管理，可以用作个人博客的后台也可以用作其他CMS的后台。
 
 
@@ -26,9 +27,9 @@ CBlog
 
 服务器环境
 ==============
-* PHP5.4以上版本（注意：PHP5.4dev版本和PHP6均不支持）, 推荐使用PHP7以达到最优效果
-* 博客文章内容以及阅读数用Redis做缓存，所以需先安装Redis，缓存配置文件application/config.php
-* [Nginx] 可以在Nginx.conf中配置如下转发规则: 
+* `PHP5.4`以上版本（注意：`PHP5.4dev`版本和`PHP6`均不支持）, 推荐使用`PHP7`以达到最优效果
+* 博客文章内容以及阅读数用`Redis`做缓存，所以需先安装`Redis`，缓存配置文件application/config.php
+* `Nginx` 可以在`Nginx.conf`中配置如下转发规则: 
 
 ```
 location / { 
