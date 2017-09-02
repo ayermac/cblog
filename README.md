@@ -21,8 +21,10 @@ CBlog
 部署
 ===============
 * 直接上传到服务器指定目录, 数据库文件存放在根目录下sql文件夹里。
+* 安装Composer，然后执行 `composer install` 安装依赖包
 * 数据库配置文件application/database.php
 * 后台管理员默认用户名：*admin*，密码：*admin*
+
 
 
 服务器环境
