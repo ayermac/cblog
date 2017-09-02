@@ -34,7 +34,7 @@ class Webhook extends Controller{
 
             $res_log .= '在 ' . date('Y-m-d H:s:i') . ' 执行了 ' . $cmd;
 
-            file_put_contents("./git-webhook.txt", $res_log, FILE_APPEND);//追加写入
+            file_put_contents("./git-webhook.txt", $res_log, FILE_APPEND);
         }
     }
 }
