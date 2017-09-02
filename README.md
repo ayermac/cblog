@@ -21,8 +21,10 @@ CBlog
 部署
 ===============
 * 直接上传到服务器指定目录, 数据库文件存放在根目录下sql文件夹里。
+* 安装Composer，然后执行 `composer install` 安装依赖包
 * 数据库配置文件application/database.php
 * 后台管理员默认用户名：*admin*，密码：*admin*
+
 
 
 服务器环境
@@ -42,4 +44,3 @@ location / {
 其他配置具体请参考`ThinkPHP`官方文档配置,[官方文档链接](https://www.kancloud.cn/manual/thinkphp5/129745)
 
 **最后在此感谢我学习借鉴过的各位前辈。**
-hook
