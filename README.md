@@ -42,4 +42,3 @@ location / {
 其他配置具体请参考`ThinkPHP`官方文档配置,[官方文档链接](https://www.kancloud.cn/manual/thinkphp5/129745)
 
 **最后在此感谢我学习借鉴过的各位前辈。**
-测试hook
