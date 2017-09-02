@@ -9,13 +9,13 @@ CBlog
 =============
 前台
 * Uikit
-  ![](http://cblog-1252077432.cossh.myqcloud.com/%E5%89%8D%E5%8F%B0.png)
+  ![](http://cblog-1252077432.file.myqcloud.com/%E5%89%8D%E5%8F%B0.png)
 
 后台
 * Bootstrap
 * Nifty
 * Layui
-  ![](http://cblog-1252077432.cossh.myqcloud.com/%E5%90%8E%E5%8F%B0.png)
+  ![](http://cblog-1252077432.file.myqcloud.com/%E5%90%8E%E5%8F%B0.png)
 
 
 部署
@@ -42,3 +42,5 @@ location / {
 其他配置具体请参考`ThinkPHP`官方文档配置,[官方文档链接](https://www.kancloud.cn/manual/thinkphp5/129745)
 
 **最后在此感谢我学习借鉴过的各位前辈。**
+
+测试hook
