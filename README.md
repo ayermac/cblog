@@ -9,13 +9,13 @@ CBlog
 =============
 前台
 * Uikit
-  ![](http://cblog-1252077432.cossh.myqcloud.com/%E5%89%8D%E5%8F%B0.png)
+  ![](http://cblog-1252077432.file.myqcloud.com/%E5%89%8D%E5%8F%B0.png)
 
 后台
 * Bootstrap
 * Nifty
 * Layui
-  ![](http://cblog-1252077432.cossh.myqcloud.com/%E5%90%8E%E5%8F%B0.png)
+  ![](http://cblog-1252077432.file.myqcloud.com/%E5%90%8E%E5%8F%B0.png)
 
 
 部署
