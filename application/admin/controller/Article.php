@@ -13,6 +13,7 @@ use app\admin\model\Category as CategoryModel;
 use think\Db;
 use service\LogService;
 use think\Cache;
+use think\Config;
 /**
  * 文章管理控制器
  * Class Article
@@ -122,6 +123,7 @@ class Article extends AdminCommon{
     {
         if ($this->request->isPost()) {
             $data            = $this->request->post();
+            $articleKey        = Config::get('rediskey.articlekey');
 
             $validate_result = $this->validate($data, 'Article');
             if (true !== $validate_result) {
@@ -130,7 +132,8 @@ class Article extends AdminCommon{
                 $res = $this->article_model->allowField(true)->save($data, $id);
                 if ( false !== $res) {
                     LogService::write('文章管理', '更新文章'.$id);
-                    Cache::rm('article'.$data['en_title']);
+                    // 清空缓存的文章
+                    Cache::rm($articleKey.$data['en_title']);
                     $this->success('更新成功');
                 } else {
                     $this->error('更新失败');

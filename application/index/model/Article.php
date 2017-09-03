@@ -10,6 +10,7 @@ namespace app\index\model;
 use think\Model;
 use think\Db;
 use think\Cache;
+use think\Config;
 /**
  * 文章模型
  * Class Article
@@ -35,7 +36,8 @@ class Article extends Model{
      */
     public function getreadingAttr($value, $data)
     {
-        $value = Cache::get('articleReading'.$data['en_title']);
+        $articleReadingKey = Config::get('rediskey.articleReadingkey');
+        $value = Cache::get($articleReadingKey.$data['en_title']);
         return $value;
     }
 
