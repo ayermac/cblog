@@ -20,24 +20,6 @@ class Webhook extends Controller{
      */
     public function update()
     {
-        error_reporting(1);
-        $target = '/home/wwwroot/www.totoroc.cn'; // 生产环境web目录
-        $wwwUser = 'www';
-        $wwwGroup = 'www';
-        $json = json_decode(file_get_contents('php://input'), true);
 
-        $cmds = array(
-            "cd $target && git pull origin develop",
-            "chown -R {$wwwUser}:{$wwwGroup} $target/"
-        );
-        foreach ($cmds as $cmd) {
-            exec($cmd);
-
-            $res_log = '-------------------------'.PHP_EOL;
-
-            $res_log .= '在 ' . date('Y-m-d H:s:i') . ' 执行了 ' . $cmd;
-
-            file_put_contents("./git-webhook.txt", $res_log, FILE_APPEND);
-        }
     }
 }
