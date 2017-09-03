@@ -130,7 +130,7 @@ class Article extends AdminCommon{
                 $res = $this->article_model->allowField(true)->save($data, $id);
                 if ( false !== $res) {
                     LogService::write('文章管理', '更新文章'.$id);
-                    Cache::rm('article'.$id);
+                    Cache::rm('article'.$data['en_title']);
                     $this->success('更新成功');
                 } else {
                     $this->error('更新失败');
