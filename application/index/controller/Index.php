@@ -45,7 +45,7 @@ class Index extends IndexCommon
 
     /**
      * 文章详情
-     * @param $en_title 文章英文标题
+     * @param $en_title
      * @return mixed
      */
     public function article($en_title)
