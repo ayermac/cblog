@@ -35,7 +35,7 @@ class Article extends Model{
      */
     public function getreadingAttr($value, $data)
     {
-        $value = Cache::get('articleReading'.$data['id']);
+        $value = Cache::get('articleReading'.$data['en_title']);
         return $value;
     }
 
