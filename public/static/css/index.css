@@ -29,3 +29,8 @@ pre {
 }
 
 .uk-margin-center { text-align: center; }
+
+/*导航栏字体大小*/
+.uk-navbar-nav>li>a {
+    font-size: 20px;
+}

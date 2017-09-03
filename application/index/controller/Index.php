@@ -45,16 +45,13 @@ class Index extends IndexCommon
 
     /**
      * 文章详情
-     * @param $id
+     * @param $en_title 文章英文标题
      * @return mixed
      */
-    public function article($id)
+    public function article($en_title)
     {
-        if (!is_numeric($id)) {
-            $this->error('参数错误');
-        }
-        $articleKey        = Config::get('rediskey.articlekey').$id;
-        $articleReadingKey = Config::get('rediskey.articleReadingkey').$id;
+        $articleKey        = Config::get('rediskey.articlekey').$en_title;
+        $articleReadingKey = Config::get('rediskey.articleReadingkey').$en_title;
 
         $value             = Cache::get($articleKey);
         $readingValue      = Cache::get($articleReadingKey);
@@ -67,9 +64,10 @@ class Index extends IndexCommon
             $article = $value;
         } else {
             $map['status'] = 1;
+            $map['en_title'] = $en_title;
             $article = $this->article_model
                 ->where($map)
-                ->find($id);
+                ->find();
 
             if (!empty($article)) {
                 $article = $article->toArray();

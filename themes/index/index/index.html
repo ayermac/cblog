@@ -28,7 +28,7 @@
                 <div class="uk-card uk-card-default uk-card-body uk-margin-large-bottom ">
                     <article class="uk-article">
                         <h1 class="uk-article-title uk-margin-center">
-                            <a class="uk-link-reset" href="/news/{$vo.id}">{$vo.title}</a>
+                            <a class="uk-link-reset" href="/news/{$vo.en_title}">{$vo.title}</a>
                         </h1>
                         <p class="uk-article-meta uk-margin-center">
                             <i class="fa fa-clock-o fa-lg"></i> 发表于 {$vo.publish_time}
@@ -43,7 +43,7 @@
                         <p class="uk-text-lead">{$vo.introduction}</p>
 
                         <div class="uk-margin-center">
-                            <a class="uk-button uk-button-text" href="/news/{$vo.id}">阅读全文</a>
+                            <a class="uk-button uk-button-text" href="/news/{$vo.en_title}">阅读全文</a>
                         </div>
                         <hr>
                         {php}

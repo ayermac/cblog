@@ -10,7 +10,7 @@
 // +----------------------------------------------------------------------
 use think\Route;
 
-Route::rule('news/:id', 'index/index/article');
+Route::rule('news/:en_title', 'index/index/article');
 return [
     '__pattern__' => [
         'name' => '\w+',

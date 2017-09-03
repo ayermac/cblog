@@ -55,21 +55,21 @@ class Crontab extends ApiCommon {
     {
         $idList = Db::name('article')
             ->where('status', 1)
-            ->field('id, reading')
+            ->field('en_title, reading')
             ->select();
 
         $reading = Config::get('rediskey.articleReadingkey');
         $res = '';
         foreach ($idList as $v) {
-            $articleReadingKey = $reading.$v['id'];
+            $articleReadingKey = $reading.$v['en_title'];
             //获取缓存中的阅读数
             $readingValue      = Cache::get($articleReadingKey) ?: 0 ;
 
             //只更新redis中更新过的阅读数
             if ($readingValue !== $v['reading']) {
-                //同步到数据库中的对应id中
+                //同步到数据库中的对应en_title英文标题中
                 $res = Db::name('article')
-                    ->where('id', $v['id'])
+                    ->where('en_title', $v['en_title'])
                     ->update(['reading' => $readingValue]);
             }
         }
