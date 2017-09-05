@@ -1,6 +1,49 @@
-/**
- * 加载nprogress
- */
+var init_load = {
+    init: function () {
+        this.pjax_init();//初始化pjax
+        this.backToTop();//返回到顶部
+    },
+    pjax_init: function () {
+        if ($.support.pjax) {
+            $(document).on('pjax:start', function () {
+                NProgress.start();
+            });
+            $(document).on('pjax:end', function () {
+                NProgress.done();
+            });
+            document.addEventListener('DOMContentLoaded', function () {
+                if ($.support.pjax) {
+                    $(document).pjax('a', '#content-container', {
+                        fragment: '#content-container',
+                        timeout: 8000,
+                        dataType: null
+                    });
+                }
+            });
+        }
+    },
+    backToTop: function () {
+        var blogScrollTop = $('.scroll-top'),
+            blogWindow = $(window),
+            isMobile = function(){
+                return ( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) )
+            }();
+
+        blogWindow.scroll(function () {
+            if ($(this).scrollTop() > 250) {
+                blogScrollTop.fadeIn();
+            } else {
+                blogScrollTop.fadeOut();
+            }
+        });
+
+        // blogScrollTop.on('click', function (e) {
+        //     e.preventDefault();
+        //     $('html, body').animate({scrollTop: 0}, 500);
+        //     return false;
+        // });
+    }
+};
 $(document).ready(function(){
     NProgress.start();
 });
@@ -8,49 +51,5 @@ $(window).load(function(){
     NProgress.done();
 });
 
-/**
- * 初始化pjax
- */
-function pjax_init(){
-    if ($.support.pjax) {
-        $(document).on('pjax:start', function () {
-            NProgress.start();
-        });
-        $(document).on('pjax:end', function () {
-            NProgress.done();
-        });
-        document.addEventListener('DOMContentLoaded', function () {
-            if ($.support.pjax) {
-                $(document).pjax('a', '#content-container', {
-                    fragment: '#content-container',
-                    timeout: 8000,
-                    dataType: null
-                });
-            }
-        });
-    }
-}
-// 如果不想要pjax效果可以把下面注释
-pjax_init();
+init_load.init();
 
-/**
- * 创建dom element,暂时只支持创建js和css
- * @param type
- * @param url
- */
-function create_element(type, url){
-    var head = document.head || document.getElementsByTagName('head')[0];
-    var element = '';
-    if(type == 'js'){
-        element = document.createElement('script');
-        element.type = 'text/javascript';
-        element.src = url;
-    }
-    else if(type == 'css'){
-        element = document.createElement('link');
-        element.href = url;
-        element.rel = 'stylesheet';
-        element.type = 'text/css';
-    }
-    head.appendChild(element);
-}

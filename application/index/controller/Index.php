@@ -38,6 +38,7 @@ class Index extends IndexCommon
     protected function getArticle()
     {
         $articleList = $this->article_model
+            ->field('title, en_title, publish_time, reading, thumb, introduction, tags')
             ->where('status', 1)
             ->order('publish_time desc')
             ->paginate(8);
