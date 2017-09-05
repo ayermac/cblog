@@ -34,3 +34,24 @@ pre {
 .uk-navbar-nav>li>a {
     font-size: 20px;
 }
+
+.scroll-top {
+    display: none;
+    background-color: #42a5f5;
+    color: #fff;
+    cursor: pointer;
+    position: fixed;
+    bottom: 45px;
+    right: 15px;
+    z-index: 999;
+    padding: 10px;
+    font-size: 1.5em;
+    border-radius: 100%;
+    box-shadow: 0 5px 15px rgba(0,0,0,.08);
+}
+.scroll-top>i {
+    display: block;
+    width: 1em;
+    height: 1em;
+    line-height: 1em;
+}

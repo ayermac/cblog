@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Jason's Blog - {$article.title}</title>
+    <title>{$site.site_title} - {$article.title}</title>
+    <meta name="keywords" content="{php}echo implode(',', $article['tags']);{/php}"/>
     <meta name="description" content="{$article.introduction}"/>
     <link href="/static/lib/uikit-3.0/css/uikit.min.css" rel="stylesheet">
     <link href="/static/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
@@ -18,7 +19,7 @@
     <![endif]-->
 </head>
 <body>
-{include file="inc/header"}
+{include file="inc/header" /}
 <div class="uk-container uk-container-small uk-position-relative">
     <div class="uk-grid-medium uk-child-width-expand@s" uk-grid>
         <div class="uk-width-4-4@m"  id="content-container">
@@ -39,4 +40,4 @@
         </div>
     </div>
 </div>
-{include file="inc/footer"}
+{include file="inc/footer" /}
