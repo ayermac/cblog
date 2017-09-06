@@ -1,3 +1,15 @@
+    <link href="/static/lib/uikit-3.0/css/uikit.min.css" rel="stylesheet">
+    <link href="/static/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/static/lib/nprogress/nprogress.css" rel="stylesheet">
+    <link href="/static/css/index.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
 <nav class="uk-navbar-container uk-margin-large-bottom" uk-navbar>
     <div class="uk-navbar-center">
         <!--<a class="uk-navbar-item uk-logo" href="#"></a>-->
@@ -15,7 +27,7 @@
                 </div>
             </li>
             {else /}
-            <li><a href="{$vo.link}" target="{$vo.target}"><i class="{$vo.icon}"></i> {$vo.name}</a></li>
+            <li><a href="{$vo.link}" target="{$vo.target}"><i class="{$vo.icon} fa-lg"></i> {$vo.name}</a></li>
             {/if}
             {/foreach}
         </ul>
