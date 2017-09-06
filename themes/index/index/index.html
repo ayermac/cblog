@@ -7,18 +7,7 @@
     <title>{$site.site_title}</title>
     <meta name="keywords" content="{$site.seo_keyword}"/>
     <meta name="description" content="{$site.seo_description}"/>
-    <link href="/static/lib/uikit-3.0/css/uikit.min.css" rel="stylesheet">
-    <link href="/static/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <link href="/static/lib/nprogress/nprogress.css" rel="stylesheet">
-    <link href="/static/css/index.css" rel="stylesheet">
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-</head>
-<body>
+
 {include file="inc/header" /}
 <div class="uk-container uk-container-small uk-position-relative">
     <div class="uk-grid-medium uk-child-width-expand@s" uk-grid>
@@ -50,7 +39,7 @@
                         if(!empty($vo['tags'][0])):
                             foreach($vo['tags'] as $v){
                                 {/php}
-                                <span class="uk-label"><i class="fa fa-tags"> {$v}</i></span>
+                                <span class=""><i class="fa fa-tags"> {$v}</i></span>
                                 {php}
                             }
                         endif;
