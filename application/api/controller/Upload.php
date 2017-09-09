@@ -14,14 +14,18 @@ use think\Config;
 
 class Upload extends ApiCommon{
 
+    protected $isOpen;
+    protected $isCdn;
     protected $config;
     protected $cosApi;
-    protected $isOpen;
 
     protected function _initialize()
     {
-        $this->isOpen = Config::get('bucket.open');
         // 判断是否开启云存储
+        $this->isOpen = Config::get('bucket.open');
+        // 判断是否使用cdn加速
+        $this->isCdn  = Config::get('bucket.cdn');
+
         if ($this->isOpen) {
             // 腾讯云COS权限配置
             $this->config = Config::get('cos');
@@ -49,7 +53,7 @@ class Upload extends ApiCommon{
      */
     public function CosUpload()
     {
-        //bucketname
+        // 存储桶名字
         $bucket = Config::get('bucket.bucketname');
 
         $config = [
@@ -59,7 +63,6 @@ class Upload extends ApiCommon{
         $images = $this->request->file('images');
 
         // 上传到本地，并验证
-        $date = date('Ymd');
         $upload_path = str_replace('\\', '/', ROOT_PATH . 'public' . DS . 'uploads');
         $info   = $images->validate($config)->move($upload_path);
 
@@ -72,7 +75,7 @@ class Upload extends ApiCommon{
             if ($ret['message'] == 'SUCCESS') {
                 $result = [
                     'error'   => 0,
-                    'url'     => $ret['data']['access_url'],
+                    'url'     => $this->isCdn ? $ret['data']['access_url'] : $ret['data']['source_url'],
                     'message' => '上传成功'
                 ];
             } else {
