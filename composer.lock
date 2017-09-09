@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "864c01a6b6b95ab2620f21219fdf8b5a",
+    "content-hash": "3356a82e26a474f9d632fb3737fe548a",
     "packages": [
         {
             "name": "ezyang/htmlpurifier",
@@ -52,6 +52,51 @@
                 "html"
             ],
             "time": "2017-06-24T02:50:48+00:00"
+        },
+        {
+            "name": "qcloud/cos-sdk-v4",
+            "version": "v4.3.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tencentyun/cos-php-sdk-v4.git",
+                "reference": "daf7b79e2a7109b57c2294976edc1aec9787bd72"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/tencentyun/cos-php-sdk-v4/daf7b79e2a7109b57c2294976edc1aec9787bd72.zip",
+                "reference": "daf7b79e2a7109b57c2294976edc1aec9787bd72",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "QCloud\\Cos\\": "src/qcloud/cos/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "yaozongyou",
+                    "email": "yaozongyou@vip.qq.com"
+                },
+                {
+                    "name": "ACTom",
+                    "email": "i@actom.me"
+                }
+            ],
+            "description": "PHP SDK for QCloud COS",
+            "keywords": [
+                "cos",
+                "php",
+                "qcloud"
+            ],
+            "time": "2017-09-04T03:35:57+00:00"
         },
         {
             "name": "topthink/framework",

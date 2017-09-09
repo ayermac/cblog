@@ -20,7 +20,8 @@
         "topthink/framework": "^5.0",
         "topthink/think-captcha": "^1.0",
         "ezyang/htmlpurifier": "dev-master",
-        "zoujingli/ip2region": "^1.0"
+        "zoujingli/ip2region": "^1.0",
+        "qcloud/cos-sdk-v4": "^4.3"
     },
     "extra": {
         "think-path": "thinkphp"
