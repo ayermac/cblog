@@ -12,6 +12,7 @@ return [
 
     'bucket' => [
         'open' => false, // 是否开启cos云存储，true为开启，false为关闭，关闭状态默认使用本机存储
+        'cdn'  => false,  // 是否开启cdn加速, 开启前请确保腾讯云存储上的cdn可以使用
         'bucketname' => '', // 存储桶名字
         'dst' => '/', // 存储路径, 默认 '/'为根目录
     ],
@@ -22,5 +23,5 @@ return [
         'region' => 'sh', // bucket所属地域：华北 'tj' 华东 'sh' 华南 'gz'
         'timeout' => 60
     ]
-
+    
 ];
