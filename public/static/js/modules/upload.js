@@ -39,10 +39,11 @@ $(function(){
             },
             multi_selection: false, //true:ctrl多文件上传, false 单文件上传
             file_data_name: 'images',
-            resize: {//图片压缩
-                height: 300,
+            resize: {//图片压缩，只对jpg格式的图片有效
+                width: 800,
+                height: 600,
                 crop: false,
-                quality: 80,
+                quality: 50,
                 preserve_headers: false
             },
             init: {
@@ -58,8 +59,10 @@ $(function(){
                 FileUploaded: function (up, file, info) { //文件上传成功的时候触发
                     var data = JSON.parse(info.response);
 
-                    thumb_upload.src = data.url;
-                    name_thumb.value = data.url;
+                    if (data.error === 0) {
+                        thumb_upload.src = data.url;
+                        name_thumb.value = data.url;
+                    }
                     layer.msg(data.message);
                 },
                 Error: function (up, err) { //上传出错的时候触发
@@ -88,7 +91,7 @@ $(function(){
             },
             multi_selection: false, //true:ctrl多文件上传, false 单文件上传
             file_data_name: 'images',
-            resize: {//图片压缩
+            resize: {//图片压缩, 只对jpg格式的图片有效
                 crop: false,
                 quality: 50,
                 preserve_headers: false
@@ -103,7 +106,9 @@ $(function(){
                 },
                 FileUploaded: function (up, file, info) { //文件上传成功的时候触发
                     var data = JSON.parse(info.response);
-                    $('#summernote').summernote('insertImage', data.url);
+                    if (data.error === 0) {
+                        $('#summernote').summernote('insertImage', data.url);
+                    }
                     layer.close(load);
                     layer.msg(data.message);
                 },

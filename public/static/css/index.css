@@ -2,7 +2,7 @@ html, body{
     /*background: #E0EAFC;  !* fallback for old browsers *!*/
     /*background: -webkit-linear-gradient(to right, #CFDEF3, #E0EAFC);  !* Chrome 10-25, Safari 5.1-6 *!*/
     /*background: linear-gradient(to right, #CFDEF3, #E0EAFC); !* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ *!*/
-    background-color: #e2e2e2;
+    background-color: #ecf0f5;
 }
 
 /*导航栏*/
@@ -62,6 +62,13 @@ pre {
     font-size: 1.5em;
     border-radius: 100%;
     box-shadow: 0 5px 15px rgba(0,0,0,.08);
+    opacity:0.6;
+}
+.scroll-top:hover {
+    opacity:1;
+}
+.scroll-top:active {
+    opacity:0.8;
 }
 .scroll-top>i {
     display: block;
