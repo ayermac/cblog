@@ -9,7 +9,7 @@ CBlog
 =============
 前台
 * Uikit
-  ![](http://cblog-1252077432.cossh.myqcloud.com/%E5%89%8D%E5%8F%B0.png)
+  ![](http://cblog-1252077432.cossh.myqcloud.com/%E5%89%8D%E5%8F%B01.1.png)
 
 后台
 * Bootstrap
@@ -21,8 +21,9 @@ CBlog
 部署
 ===============
 * 直接上传到服务器指定目录, 数据库文件存放在根目录下sql文件夹里。
-* 安装Composer，然后执行 `composer install` 安装依赖包
-* 数据库配置文件application/database.php
+* 安装 Composer，然后执行 `composer install` 安装依赖包
+* 数据库配置文件 application/database.php
+* 后台上传图片集成腾讯云存储功能，如需使用，需要先开通腾讯云存储 `https://console.cloud.tencent.com/cos4/index`，并配置 application/api/config.php 文件
 * 后台管理员默认用户名：*admin*，密码：*admin*
 
 
