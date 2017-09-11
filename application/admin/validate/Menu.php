@@ -11,9 +11,10 @@ use think\Validate;
 
 class Menu extends Validate{
     protected $rule = [
-       'pid'   => 'require',
-       'title' => 'require',
-       'name'  => 'require|unique:auth_rule',
+       'pid'        => 'require',
+       'title'      => 'require',
+       'name'       => 'require|unique:auth_rule',
+       '__token__'  => 'require|token'
     ];
 
     protected $message = [

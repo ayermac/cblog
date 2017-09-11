@@ -56,7 +56,7 @@ class Category extends AdminCommon{
             if(true !== $validate_result) {
                 $this->error($validate_result);
             } else {
-                $res = $this->category_model->save($data);
+                $res = $this->category_model->allowField(true)->save($data);
 
                 if(false !== $res) {
                     $this->success('保存成功');

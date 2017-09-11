@@ -51,7 +51,7 @@ class AuthGroup extends AdminCommon{
             if(true !== $validate_result) {
                 $this->error($validate_result);
             } else {
-                $res = $this->auth_group_model->save($data);
+                $res = $this->auth_group_model->allowField(true)->save($data);
                 if (false !== $res) {
                     $this->success('保存成功');
                 } else {
@@ -88,7 +88,7 @@ class AuthGroup extends AdminCommon{
                     $this->error('超级管理员不可禁用');
                 }
 
-                $res = $this->auth_group_model->save($data, $id);
+                $res = $this->auth_group_model->allowField(true)->save($data, $id);
 
                 if (false !== $res) {
                     $this->success('更新成功');
@@ -183,7 +183,7 @@ class AuthGroup extends AdminCommon{
                 $group_data['id']    = $id;
                 $group_data['rules'] = is_array($auth_rule_ids) ? implode(',', $auth_rule_ids) : '';
 
-                $res = $this->auth_group_model->save($group_data, $id);
+                $res = $this->auth_group_model->allowField(true)->save($group_data, $id);
                 if(false !== $res) {
                     $this->success('授权成功');
                 } else {

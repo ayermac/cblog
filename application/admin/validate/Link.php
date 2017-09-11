@@ -17,7 +17,8 @@ use think\Validate;
 class Link extends Validate
 {
     protected $rule = [
-        'name' => 'require|max:20'
+        'name'       => 'require|max:20',
+        '__token__'  => 'require|token'
     ];
 
     protected $message = [
