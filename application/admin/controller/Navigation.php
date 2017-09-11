@@ -52,7 +52,7 @@ class Navigation extends AdminCommon{
             if(true !== $validate_result) {
                 $this->error($validate_result);
             } else {
-                $res = $this->navigation_model->save($data);
+                $res = $this->navigation_model->allowField(true)->save($data);
 
                 if(false !== $res) {
                     $this->success('保存成功');
@@ -85,7 +85,7 @@ class Navigation extends AdminCommon{
             if(true !== $validate_result) {
                 $this->error($validate_result);
             } else {
-                $res = $this->navigation_model->save($data, $id);
+                $res = $this->navigation_model->allowField(true)->save($data, $id);
 
                 if(false !== $res) {
                     $this->success('更新成功');

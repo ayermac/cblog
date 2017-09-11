@@ -13,10 +13,11 @@ class AuthGroup extends Validate{
     protected $rule = [
         'title'         => 'require',
         'status'        => 'require',
+        '__token__'     => 'require|token'
     ];
 
     protected $message = [
         'title.require'        => '请填写权限组名称',
-        'status.require'          => '请选择状态',
+        'status.require'       => '请选择状态',
     ];
 }

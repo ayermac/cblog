@@ -96,7 +96,7 @@ class Article extends AdminCommon{
             if(true !== $validate_result) {
                 $this->error($validate_result);
             } else {
-                $res = $this->article_model->save($data);
+                $res = $this->article_model->allowField(true)->save($data);
 
                 if(false !== $res) {
                     LogService::write('文章管理', '新增文章');

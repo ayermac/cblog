@@ -11,9 +11,10 @@ use think\Validate;
 
 class Category extends Validate{
     protected $rule = [
-        'pid'  => 'require',
-        'name' => 'require',
-        'sort' => 'require|number'
+        'pid'        => 'require',
+        'name'       => 'require',
+        'sort'       => 'require|number',
+        '__token__'  => 'require|token'
     ];
 
     protected $message = [

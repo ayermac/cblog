@@ -11,10 +11,11 @@ use think\Validate;
 
 class Article extends Validate{
     protected $rule = [
-       'cid'      => 'require|egt:1',
-       'title'    => 'require',
-       'en_title' => 'require|unique:article',
-       'sort'     => 'require|number'
+       'cid'        => 'require|egt:1',
+       'title'      => 'require',
+       'en_title'   => 'require|unique:article',
+       'sort'       => 'require|number',
+       '__token__'  => 'require|token'
     ];
 
     protected $message = [

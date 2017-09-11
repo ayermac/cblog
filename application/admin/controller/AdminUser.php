@@ -62,7 +62,7 @@ class AdminUser extends AdminCommon{
     {
         if($this->request->isPost()) {
             $data            = $this->request->post();
-            $validate_result = $this->validate($data, 'AdminUser');
+            $validate_result = $this->validate($data, 'AdminUser.add');
 
             if(true !== $validate_result) {
                 $this->error($validate_result);
@@ -106,7 +106,7 @@ class AdminUser extends AdminCommon{
     {
         if($this->request->isPost()) {
             $data            = $this->request->post();
-            $validate_result = $this->validate($data, 'AdminUser');
+            $validate_result = $this->validate($data, 'AdminUser.add');
 
             if ($id == 1 && $data['status'] != 1) {
                 $this->error('默认管理员不可禁用');

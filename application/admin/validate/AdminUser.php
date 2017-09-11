@@ -16,7 +16,8 @@ class AdminUser extends Validate{
         'password'         => 'confirm:confirm_password',
         'confirm_password' => 'confirm:password',
         'status'           => 'require',
-        'group_id'         => 'require'
+        'group_id'         => 'require',
+        '__token__'        => 'require|token'
     ];
 
     protected $message = [
@@ -30,6 +31,7 @@ class AdminUser extends Validate{
     ];
 
     protected $scene = [
-        'profile'  =>  ['username', 'old_password', 'password', 'confirm_password'],
+        'profile'  =>  ['username', 'old_password', 'password', 'confirm_password', '__token__'],
+        'add'      =>  ['username', 'password', 'confirm_password', '__token__']
     ];
 }

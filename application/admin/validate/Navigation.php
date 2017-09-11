@@ -11,9 +11,10 @@ use think\Validate;
 
 class Navigation extends Validate{
     protected $rule = [
-      'pid'   => 'require',
-      'name'  => 'require',
-      'sort'  => 'require|number',
+      'pid'        => 'require',
+      'name'       => 'require',
+      'sort'       => 'require|number',
+      '__token__'  => 'require|token'
     ];
 
     protected $message = [

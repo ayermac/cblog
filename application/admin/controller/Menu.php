@@ -57,7 +57,7 @@ class Menu extends AdminCommon{
             if(true !== $validate_result) {
                 $this->error($validate_result);
             } else {
-                $add = $this->authrule->save($data);
+                $add = $this->authrule->allowField(true)->save($data);
                 if(false !== $add) {
                     $this->success('保存成功');
                 } else {
@@ -93,7 +93,7 @@ class Menu extends AdminCommon{
             if(true !== $validate_result) {
                 $this->error($validate_result);
             } else {
-                $res = $this->authrule->save($data, $id);
+                $res = $this->authrule->allowField(true)->save($data, $id);
 
                 if(false !== $res) {
                     $this->success('更新成功');
