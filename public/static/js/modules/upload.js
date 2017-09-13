@@ -11,6 +11,9 @@ $(function(){
         layui.upload({
             url: '/api/upload/ImageUpload' //上传接口
             ,title: '上传头像'
+            ,before: function(input){
+                load = layer.load(2);
+            }
             ,success: function(res){ //上传成功后的回调
                 if (res.error == 0) {
                     avatar_upload.src = res.url;
@@ -18,6 +21,7 @@ $(function(){
                 } else {
                     layer.msg(res.message, function() {});
                 }
+                layer.close(load);
             }
         });
 

@@ -58,7 +58,7 @@ class Upload extends ApiCommon{
 
         $config = [
             'size' => 2097152,//大小2M
-            'ext'  => 'jpg,gif,png,bmp'
+            'ext'  => 'jpg,jpeg,gif,png,bmp'
         ];
         $images = $this->request->file('images');
 
@@ -98,7 +98,7 @@ class Upload extends ApiCommon{
     {
         $config = [
             'size' => 2097152,//大小2M
-            'ext'  => 'jpg,gif,png,bmp'
+            'ext'  => 'jpg,jpeg,gif,png,bmp'
         ];
         $images = $this->request->file('images');
 
