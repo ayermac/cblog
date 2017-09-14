@@ -68,7 +68,7 @@ class Upload extends ApiCommon{
 
         if($info) {
             $src = $info->getPathname();
-            $dst = Config::get('bucket.dst') . $info->getFilename();
+            $dst = Config::get('bucket.dst') . date('Y_m') . '/' . $info->getFilename();
             // 上传图片
             $ret = $this->cosApi->upload($bucket, $src, $dst);
 
