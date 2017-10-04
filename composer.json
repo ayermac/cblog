@@ -21,7 +21,8 @@
         "topthink/think-captcha": "^1.0",
         "ezyang/htmlpurifier": "dev-master",
         "zoujingli/ip2region": "^1.0",
-        "qcloud/cos-sdk-v4": "^4.3"
+        "qcloud/cos-sdk-v4": "^4.3",
+        "erusev/parsedown": "^1.6"
     },
     "extra": {
         "think-path": "thinkphp"
