@@ -28,7 +28,7 @@ layui.use(['layer', 'layedit'], function(){
         return button.render();   // return button as jquery object
     };
 
-    $('#summernote').summernote({
+    $('#editor').summernote({
         height : '500px'
         ,lang: 'zh-CN'//语言
         ,placeholder: 'write here...'

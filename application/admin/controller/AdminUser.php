@@ -192,7 +192,7 @@ class AdminUser extends AdminCommon{
     public function profile()
     {
         $id = Session::get('admin_id');
-        $admin_user = $this->admin_user_model->field('id,username,avatar')->find($id);
+        $admin_user = $this->admin_user_model->field('id,username,avatar,editor')->find($id);
         return $this->fetch('profile', ['admin_user'=>$admin_user]);
     }
 
@@ -224,6 +224,7 @@ class AdminUser extends AdminCommon{
                 $admin_user->id = $id;
                 $admin_user->username = $data['username'];
                 $admin_user->avatar = $data['avatar'];
+                $admin_user->editor = $data['editor'];
 
                 if (!empty($data['password']) && !empty($data['confirm_password'])) {
                     $admin_user->password = password_hash($data['password'], PASSWORD_BCRYPT);

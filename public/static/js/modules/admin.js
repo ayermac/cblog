@@ -111,7 +111,7 @@ layui.use(['layer', 'form', 'laypage', 'element', 'laydate'], function(){
      */
     form.on('submit(article)', function (data) {
         //文章内容
-        var markupStr = $('#summernote').summernote('code');
+        var markupStr = localStorage.editor==='plain' ? $('#editor').summernote('code') : simplemde.value();
 
         var btn = $(this).button('loading');
         var index;
@@ -156,6 +156,10 @@ layui.use(['layer', 'form', 'laypage', 'element', 'laydate'], function(){
         var btn      = $(this).button('loading');
         var isreload = $(this).attr('isreload'); //判断是否重新加载页面
         var index;
+        var editorType = data.field.editor; // 切换编辑器
+        if (editorType) {
+            localStorage.editor = editorType;
+        }
         $.ajax({
             url: data.form.action,
             type: data.form.method,
