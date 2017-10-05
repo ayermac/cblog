@@ -28,6 +28,7 @@ CREATE TABLE `think_admin_user` (
   `last_login_time` datetime DEFAULT NULL COMMENT '最后登录时间',
   `last_login_ip` varchar(20) DEFAULT NULL COMMENT '最后登录IP',
   `avatar` varchar(128) DEFAULT NULL COMMENT '头像',
+  `editor` varchar(8) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`) USING BTREE
 ) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='管理员表';
