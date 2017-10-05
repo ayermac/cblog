@@ -125,10 +125,10 @@
         var GL = {
             current_controller: "admin/{$controller|default=''}/"
         };
-        if (editor === 'plain') {
-            create_element('js', '/static/js/modules/text-editor.js');
-        } else {
+        if (editor === 'markdown') {
             create_element('js', '/static/js/modules/md.js');
+        } else {
+            create_element('js', '/static/js/modules/text-editor.js');
         }
         create_element('js', '/static/js/modules/admin.js');
         create_element('js', '/static/js/modules/upload.js');

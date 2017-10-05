@@ -48,7 +48,7 @@
                         <div class="form-group">
                             <label for="demo-is-inputlarge" class="col-sm-3 control-label">常用编辑器</label>
                             <div class="col-sm-3">
-                                <input type="radio" name="editor" value="plain" title="富文本" {if condition="$admin_user.editor=='plain'"} checked="checked" {/if}>
+                                <input type="radio" name="editor" value="plain" title="富文本" {if condition="$admin_user.editor=='plain' || $admin_user.editor==''"} checked="checked" {/if}>
                                 <input type="radio" name="editor" value="markdown" title="Markdown" {if condition="$admin_user.editor=='markdown'"} checked="checked" {/if}>
                             </div>
                         </div>
