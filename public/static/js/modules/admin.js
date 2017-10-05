@@ -100,7 +100,7 @@ layui.use(['layer', 'form', 'element', 'laydate'], function(){
      */
     form.on('submit(article)', function (data) {
         //文章内容
-        var markupStr = localStorage.editor==='plain' ? $('#editor').summernote('code') : simplemde.value();
+        var markupStr = localStorage.editor==='markdown' ? simplemde.value() : $('#editor').summernote('code');
 
         var btn = $(this).button('loading');
         var index;
