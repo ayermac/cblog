@@ -5,10 +5,9 @@
  项目JS主入口
  以依赖Layui的layer和form模块为例
  **/
-layui.use(['layer', 'form', 'laypage', 'element', 'laydate'], function(){
+layui.use(['layer', 'form', 'element', 'laydate'], function(){
     var layer    = layui.layer
         ,form    = layui.form()
-        ,laypage = layui.laypage
         ,element = layui.element()
         ,laydate = layui.laydate
         ,tips;
@@ -95,16 +94,6 @@ layui.use(['layer', 'form', 'laypage', 'element', 'laydate'], function(){
             });
         }
     });
-    /**
-     * 通用分页
-     */
-    if(document.getElementById('lay-page')) {
-        laypage({
-            cont: 'lay-page'
-            , pages: 10 //总页数
-            , groups: 5 //连续显示分页数
-        });
-    }
 
     /**
      * 文章(AJAX方式)

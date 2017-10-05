@@ -1,13 +1,8 @@
 /**
  * Created by Jason on 2017/7/4.
  */
-layui.use(['layer', 'layedit'], function(){
-    var layer    = layui.layer
-        ,layedit = layui.layedit;
-    /**
-     * 初始化编辑器
-     */
-    layedit.build('lay-edit');
+layui.use(['layer'], function(){
+    var layer    = layui.layer;
 
     /**
      * 初始化编辑器
