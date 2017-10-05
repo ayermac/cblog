@@ -8,7 +8,6 @@
 namespace app\admin\model;
 
 use think\Model;
-use think\Db;
 use think\Session;
 
 /**
@@ -17,7 +16,19 @@ use think\Session;
  * @package app\admin\model
  */
 class Article extends Model{
+
+    protected $purifier;
     protected $insert = ['create_time'];
+
+    public function __construct($data = [])
+    {
+        parent::__construct($data);
+        /**
+         * XSS 过滤
+         */
+        $config = \HTMLPurifier_Config::createDefault();
+        $this->purifier = new \HTMLPurifier($config);
+    }
 
     /**
      * 文章作者
@@ -39,13 +50,13 @@ class Article extends Model{
     }
 
     /**
-     * 反转义HTML实体标签
+     * XSS 过滤
      * @param $value
      * @return string
      */
-    protected function setContentAttr($value)
+    protected function getContentAttr($value)
     {
-        return htmlspecialchars_decode($value);
+        return $this->purifier->purify(htmlspecialchars_decode($value));
     }
 
     /**
@@ -56,4 +67,6 @@ class Article extends Model{
     {
         return $value ? $value : date('Y-m-d H:i:s');
     }
+
+
 }

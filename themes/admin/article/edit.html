@@ -116,7 +116,8 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">文章内容</h3>
                 </div>
-                <textarea id="editor">{$article.content}</textarea>
+                {if condition="$editorType=='plain'"}<div id="editor" >{$article.content}</div>{/if}
+                {if condition="$editorType=='markdown'"}<textarea id="editor" >{$article.content}</textarea>{/if}
             </div>
         </div>
     </div>
