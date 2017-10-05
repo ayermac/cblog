@@ -189,13 +189,10 @@ class AdminUser extends AdminCommon{
      * 管理员个人信息管理
      * @param $id
      */
-    public function profile($id)
+    public function profile()
     {
-        // 只有id为1的管理员可以访问和修改其他管理员的个人资料
-        if($id != Session::get('admin_id') && Session::get('admin_id') != 1) {
-            $this->error('没有权限');
-        }
-        $admin_user = $this->admin_user_model->field('id,username,avatar')->find($id);
+        $id = Session::get('admin_id');
+        $admin_user = $this->admin_user_model->field('id,username,avatar,editor')->find($id);
         return $this->fetch('profile', ['admin_user'=>$admin_user]);
     }
 
@@ -203,12 +200,10 @@ class AdminUser extends AdminCommon{
      * 更新个人资料
      * @param $id
      */
-    public function updateProfile($id)
+    public function updateProfile()
     {
         if($this->request->isPost()) {
-            if($id != Session::get('admin_id') && Session::get('admin_id') != 1) {
-                $this->error('没有权限');
-            }
+            $id = Session::get('admin_id');
 
             $data            = $this->request->post();
             $validate_result = $this->validate($data, 'AdminUser.profile');
@@ -229,6 +224,7 @@ class AdminUser extends AdminCommon{
                 $admin_user->id = $id;
                 $admin_user->username = $data['username'];
                 $admin_user->avatar = $data['avatar'];
+                $admin_user->editor = $data['editor'];
 
                 if (!empty($data['password']) && !empty($data['confirm_password'])) {
                     $admin_user->password = password_hash($data['password'], PASSWORD_BCRYPT);

@@ -45,10 +45,10 @@ class AdminCommon extends Controller{
 
         // 排除权限
         $not_check = [
-            'admin/Index/index',
+            'admin/Index/index', // 首页
             'admin/AuthGroup/getjson',
-            'admin/AdminUser/profile',
-            'admin/AdminUser/updateprofile'
+            'admin/AdminUser/profile', // 个人资料
+            'admin/AdminUser/updateprofile' // 更新个人资料
         ];
 
         if(!in_array($module . '/' . $controller . '/' . $action, $not_check)) {

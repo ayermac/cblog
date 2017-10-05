@@ -115,17 +115,22 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">文章内容</h3>
                 </div>
-                <div id="summernote"></div>
+                <textarea id="editor"></textarea>
             </div>
         </div>
     </div>
     <script>
+        var editor = localStorage.editor;
         //定义全局JS对象
         var GL = {
             current_controller: "admin/{$controller|default=''}/"
         };
+        if (editor === 'plain') {
+            create_element('js', '/static/js/modules/text-editor.js');
+        } else {
+            create_element('js', '/static/js/modules/md.js');
+        }
         create_element('js', '/static/js/modules/admin.js');
-        create_element('js', '/static/js/modules/text-editor.js');
         create_element('js', '/static/js/modules/upload.js');
     </script>
 </div>

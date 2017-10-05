@@ -17,6 +17,15 @@ use think\Config;
  * @package app\index\model
  */
 class Article extends Model{
+
+    protected $parsedown;
+
+    public function __construct($data = [])
+    {
+        parent::__construct($data);
+        $this->parsedown = new \Parsedown();
+    }
+
     /**
      * 格式化发布时间
      * @param $value
@@ -44,6 +53,17 @@ class Article extends Model{
     public function getTagsAttr($value)
     {
         $value = explode(',', $value);
+        return $value;
+    }
+
+    /**
+     * Markdown 转 Html
+     * @param $value
+     * @return string
+     */
+    public function getContentAttr($value)
+    {
+        $value = $this->parsedown->text($value);
         return $value;
     }
 }

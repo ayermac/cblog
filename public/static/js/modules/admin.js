@@ -5,10 +5,9 @@
  项目JS主入口
  以依赖Layui的layer和form模块为例
  **/
-layui.use(['layer', 'form', 'laypage', 'element', 'laydate'], function(){
+layui.use(['layer', 'form', 'element', 'laydate'], function(){
     var layer    = layui.layer
         ,form    = layui.form()
-        ,laypage = layui.laypage
         ,element = layui.element()
         ,laydate = layui.laydate
         ,tips;
@@ -85,6 +84,9 @@ layui.use(['layer', 'form', 'laypage', 'element', 'laydate'], function(){
                             }
                             //layer.msg(info.msg);
                             layer.close(load);
+                        },
+                        error: function () {
+                            layer.msg('HTTP ERROR', function () {});
                         }
                     });
                     layer.close(index);
@@ -92,23 +94,13 @@ layui.use(['layer', 'form', 'laypage', 'element', 'laydate'], function(){
             });
         }
     });
-    /**
-     * 通用分页
-     */
-    if(document.getElementById('lay-page')) {
-        laypage({
-            cont: 'lay-page'
-            , pages: 10 //总页数
-            , groups: 5 //连续显示分页数
-        });
-    }
 
     /**
      * 文章(AJAX方式)
      */
     form.on('submit(article)', function (data) {
         //文章内容
-        var markupStr = $('#summernote').summernote('code');
+        var markupStr = localStorage.editor==='plain' ? $('#editor').summernote('code') : simplemde.value();
 
         var btn = $(this).button('loading');
         var index;
@@ -138,6 +130,9 @@ layui.use(['layer', 'form', 'laypage', 'element', 'laydate'], function(){
                     btn.button('reset');
                 }
                 layer.close(index);
+            },
+            error: function () {
+                layer.msg('HTTP ERROR', function () {});
             }
         });
         return false;
@@ -150,6 +145,10 @@ layui.use(['layer', 'form', 'laypage', 'element', 'laydate'], function(){
         var btn      = $(this).button('loading');
         var isreload = $(this).attr('isreload'); //判断是否重新加载页面
         var index;
+        var editorType = data.field.editor; // 切换编辑器
+        if (editorType) {
+            localStorage.editor = editorType;
+        }
         $.ajax({
             url: data.form.action,
             type: data.form.method,
@@ -181,6 +180,9 @@ layui.use(['layer', 'form', 'laypage', 'element', 'laydate'], function(){
                     btn.button('reset');
                 }
                 layer.close(index);
+            },
+            error: function () {
+                layer.msg('HTTP ERROR', function () {});
             }
         });
         return false;
@@ -232,6 +234,9 @@ layui.use(['layer', 'form', 'laypage', 'element', 'laydate'], function(){
                     form.render('checkbox');
                 }
                 layer.close(index);
+            },
+            error: function () {
+                layer.msg('HTTP ERROR', function () {});
             }
         });
     });
@@ -282,6 +287,9 @@ layui.use(['layer', 'form', 'laypage', 'element', 'laydate'], function(){
                     swal(info.msg, "", "warning");
                 }
                 layer.close(index);
+            },
+            error: function () {
+                layer.msg('HTTP ERROR', function () {});
             }
         });
     });
@@ -325,6 +333,9 @@ layui.use(['layer', 'form', 'laypage', 'element', 'laydate'], function(){
                         swal(info.msg, "", "warning");
                     }
                     layer.close(load);
+                },
+                error: function () {
+                    layer.msg('HTTP ERROR', function () {});
                 }
             });
             layer.close(index);
@@ -378,6 +389,9 @@ layui.use(['layer', 'form', 'laypage', 'element', 'laydate'], function(){
                     btn.button('reset');
                 }
                 layer.close(index);
+            },
+            error: function () {
+                layer.msg('HTTP ERROR', function () {});
             }
         });
     });
