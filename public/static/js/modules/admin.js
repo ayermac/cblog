@@ -85,6 +85,9 @@ layui.use(['layer', 'form', 'laypage', 'element', 'laydate'], function(){
                             }
                             //layer.msg(info.msg);
                             layer.close(load);
+                        },
+                        error: function () {
+                            layer.msg('HTTP ERROR', function () {});
                         }
                     });
                     layer.close(index);
@@ -138,6 +141,9 @@ layui.use(['layer', 'form', 'laypage', 'element', 'laydate'], function(){
                     btn.button('reset');
                 }
                 layer.close(index);
+            },
+            error: function () {
+                layer.msg('HTTP ERROR', function () {});
             }
         });
         return false;
@@ -181,6 +187,9 @@ layui.use(['layer', 'form', 'laypage', 'element', 'laydate'], function(){
                     btn.button('reset');
                 }
                 layer.close(index);
+            },
+            error: function () {
+                layer.msg('HTTP ERROR', function () {});
             }
         });
         return false;
@@ -232,6 +241,9 @@ layui.use(['layer', 'form', 'laypage', 'element', 'laydate'], function(){
                     form.render('checkbox');
                 }
                 layer.close(index);
+            },
+            error: function () {
+                layer.msg('HTTP ERROR', function () {});
             }
         });
     });
@@ -282,6 +294,9 @@ layui.use(['layer', 'form', 'laypage', 'element', 'laydate'], function(){
                     swal(info.msg, "", "warning");
                 }
                 layer.close(index);
+            },
+            error: function () {
+                layer.msg('HTTP ERROR', function () {});
             }
         });
     });
@@ -325,6 +340,9 @@ layui.use(['layer', 'form', 'laypage', 'element', 'laydate'], function(){
                         swal(info.msg, "", "warning");
                     }
                     layer.close(load);
+                },
+                error: function () {
+                    layer.msg('HTTP ERROR', function () {});
                 }
             });
             layer.close(index);
@@ -378,6 +396,9 @@ layui.use(['layer', 'form', 'laypage', 'element', 'laydate'], function(){
                     btn.button('reset');
                 }
                 layer.close(index);
+            },
+            error: function () {
+                layer.msg('HTTP ERROR', function () {});
             }
         });
     });
