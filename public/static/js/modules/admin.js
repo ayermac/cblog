@@ -96,59 +96,13 @@ layui.use(['layer', 'form', 'element', 'laydate'], function(){
     });
 
     /**
-     * 文章(AJAX方式)
-     */
-    form.on('submit(article)', function (data) {
-        //文章内容
-        var markupStr = localStorage.editor==='markdown' ? simplemde.value() : $('#editor').summernote('code');
-
-        var btn = $(this).button('loading');
-        var index;
-        data.field.content = markupStr;
-        $.ajax({
-            url: data.form.action,
-            type: data.form.method,
-            data: data.field,
-            beforeSend: function() {
-              index = layer.load(2);
-            },
-            success: function (info) {
-                if (info.code === 1) {
-                    swal({
-                        title: info.msg,
-                        text: "",
-                        type: "success"
-                    }).then(function() {
-                        $.pjax.reload('#content-container', {
-                            fragment: '#content-container',
-                            timeout: 8000,
-                            dataType: null
-                        });
-                    });
-                } else {
-                    swal(info.msg, "", "warning");
-                    btn.button('reset');
-                }
-                layer.close(index);
-            },
-            error: function () {
-                layer.msg('HTTP ERROR', function () {});
-            }
-        });
-        return false;
-    });
-
-    /**
      * 通用表单提交(AJAX方式)
      */
     form.on('submit(*)', function (data) {
         var btn      = $(this).button('loading');
         var isreload = $(this).attr('isreload'); //判断是否重新加载页面
         var index;
-        var editorType = data.field.editor; // 切换编辑器
-        if (editorType) {
-            localStorage.editor = editorType;
-        }
+
         $.ajax({
             url: data.form.action,
             type: data.form.method,

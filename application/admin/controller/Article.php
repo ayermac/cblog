@@ -115,7 +115,7 @@ class Article extends AdminCommon{
     {
         $article = $this->article_model->find($id)->toArray();
 
-        return $this->fetch('edit', ['article' => $article, 'editorType' => $this->editorType]);
+        return $this->fetch('edit', ['article' => $article, 'editorType' => $article['editor_type']]);
     }
 
     /*

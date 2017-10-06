@@ -123,18 +123,65 @@
         </div>
     </div>
     <script>
-        var editor = localStorage.editor;
         //定义全局JS对象
         var GL = {
             current_controller: "admin/{$controller|default=''}/"
         };
-        if (editor === 'markdown') {
+        if ('{$editorType}' === 'markdown') {
             create_element('js', '/static/js/modules/md.js');
         } else {
             create_element('js', '/static/js/modules/text-editor.js');
         }
         create_element('js', '/static/js/modules/admin.js');
         create_element('js', '/static/js/modules/upload.js');
+        layui.use(['layer', 'form'], function() {
+            var layer = layui.layer
+                , form = layui.form();
+
+            /**
+             * 文章(AJAX方式)
+             */
+            form.on('submit(article)', function (data) {
+                //文章内容
+                var markupStr = '{$editorType}' === 'markdown' ? simplemde.value() : $('#editor').summernote('code');
+
+                var btn = $(this).button('loading');
+                var index;
+                data.field.content = markupStr;
+                $.ajax({
+                    url: data.form.action,
+                    type: data.form.method,
+                    data: data.field,
+                    beforeSend: function () {
+                        index = layer.load(2);
+                    },
+                    success: function (info) {
+                        if (info.code === 1) {
+                            swal({
+                                title: info.msg,
+                                text: "",
+                                type: "success"
+                            }).then(function () {
+                                $.pjax.reload('#content-container', {
+                                    fragment: '#content-container',
+                                    timeout: 8000,
+                                    dataType: null
+                                });
+                            });
+                        } else {
+                            swal(info.msg, "", "warning");
+                            btn.button('reset');
+                        }
+                        layer.close(index);
+                    },
+                    error: function () {
+                        layer.msg('HTTP ERROR', function () {
+                        });
+                    }
+                });
+                return false;
+            });
+        });
     </script>
 </div>
 {/block}
