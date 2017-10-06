@@ -59,7 +59,9 @@ CREATE TABLE `think_article` (
   `sort` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `publish_time` datetime NOT NULL COMMENT '发布时间',
+  `editor_type` varchar(8) DEFAULT NULL COMMENT '编辑器类型',
   PRIMARY KEY (`id`)
+  UNIQUE KEY `en_title` (`en_title`)
 ) ENGINE=MyISAM AUTO_INCREMENT=33 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='文章表';
 
 -- ----------------------------

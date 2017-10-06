@@ -8,10 +8,8 @@
 namespace app\index\model;
 
 use think\Model;
-use think\Db;
 use think\Cache;
 use think\Config;
-use think\Session;
 
 /**
  * 文章模型
@@ -21,17 +19,12 @@ use think\Session;
 class Article extends Model{
 
     protected $parsedown;
-    protected $isMarkdown;
     protected $purifier;
 
     public function __construct($data = [])
     {
         parent::__construct($data);
         $this->parsedown = new \Parsedown();
-        $this->isMarkdown = Db::name('admin_user')
-            ->field('editor')
-            ->where(['id' => Session::get('admin_id')])
-            ->find()['editor'];
 
         /**
          * XSS 过滤
@@ -78,7 +71,7 @@ class Article extends Model{
      */
     protected function getContentAttr($value)
     {
-        if ($this->isMarkdown == 'markdown') {
+        if ($this->getAttr('editor_type') == 'markdown') {
             $value = $this->parsedown->text($value);
         }
         return $this->purifier->purify(htmlspecialchars_decode($value));
