@@ -11,6 +11,8 @@ use think\Model;
 use think\Db;
 use think\Cache;
 use think\Config;
+use think\Session;
+
 /**
  * 文章模型
  * Class Article
@@ -19,11 +21,23 @@ use think\Config;
 class Article extends Model{
 
     protected $parsedown;
+    protected $isMarkdown;
+    protected $purifier;
 
     public function __construct($data = [])
     {
         parent::__construct($data);
         $this->parsedown = new \Parsedown();
+        $this->isMarkdown = Db::name('admin_user')
+            ->field('editor')
+            ->where(['id' => Session::get('admin_id')])
+            ->find()['editor'];
+
+        /**
+         * XSS 过滤
+         */
+        $config = \HTMLPurifier_Config::createDefault();
+        $this->purifier = new \HTMLPurifier($config);
     }
 
     /**
@@ -31,7 +45,7 @@ class Article extends Model{
      * @param $value
      * @return bool|string
      */
-    public function getPublishTimeAttr($value)
+    protected function getPublishTimeAttr($value)
     {
         $value = substr($value, 0, 11);
         return $value;
@@ -43,14 +57,14 @@ class Article extends Model{
      * @param $data
      * @return mixed
      */
-    public function getreadingAttr($value, $data)
+    protected function getreadingAttr($value, $data)
     {
         $articleReadingKey = Config::get('rediskey.articleReadingkey');
         $value = Cache::get($articleReadingKey.$data['en_title']);
         return $value;
     }
 
-    public function getTagsAttr($value)
+    protected function getTagsAttr($value)
     {
         $value = explode(',', $value);
         return $value;
@@ -58,12 +72,15 @@ class Article extends Model{
 
     /**
      * Markdown 转 Html
+     * XSS 过滤
      * @param $value
      * @return string
      */
-    public function getContentAttr($value)
+    protected function getContentAttr($value)
     {
-        $value = $this->parsedown->text($value);
-        return $value;
+        if ($this->isMarkdown == 'markdown') {
+            $value = $this->parsedown->text($value);
+        }
+        return $this->purifier->purify(htmlspecialchars_decode($value));
     }
 }
