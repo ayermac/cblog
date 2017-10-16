@@ -92,7 +92,7 @@
                         <div class="form-group">
                             <label for="demo-is-inputnormal" class="col-sm-2 control-label">发布时间</label>
                             <div class="col-sm-6">
-                                <input type="text" name="publish_time" value="{:date('Y-m-d H:i:s')}"  placeholder="" class="layui-input datetime">
+                                <input type="text" id="datetime" name="publish_time" value="{:date('Y-m-d H:i:s')}"  placeholder="" class="layui-input">
                             </div>
                         </div>
                         <div class="form-group">
@@ -135,7 +135,7 @@
         create_element('js', '/static/js/modules/upload.js');
         layui.use(['layer', 'form'], function() {
             var layer = layui.layer
-                , form = layui.form();
+                , form = layui.form;
 
             /**
              * 文章(AJAX方式)

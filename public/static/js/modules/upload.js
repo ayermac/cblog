@@ -5,16 +5,18 @@ $(function(){
 
     layui.use(['layer', 'element', 'upload'], function(){
         var layer    = layui.layer
-            ,element = layui.element()
+            ,element = layui.element
+            ,upload = layui.upload
             ,load;
 
-        layui.upload({
-            url: '/api/upload/ImageUpload' //上传接口
-            ,title: '上传头像'
+        upload.render({
+            elem: '#avatar_upload'
+            ,url: '/api/upload/ImageUpload' //上传接口
+            ,field: 'images'
             ,before: function(input){
                 load = layer.load(2);
             }
-            ,success: function(res){ //上传成功后的回调
+            ,done: function(res){ //上传成功后的回调
                 if (res.error == 0) {
                     avatar_upload.src = res.url;
                     avatar.value = res.url;

@@ -7,8 +7,8 @@
  **/
 layui.use(['layer', 'form', 'element', 'laydate'], function(){
     var layer    = layui.layer
-        ,form    = layui.form()
-        ,element = layui.element()
+        ,form    = layui.form
+        ,element = layui.element
         ,laydate = layui.laydate
         ,tips;
 
@@ -22,12 +22,9 @@ layui.use(['layer', 'form', 'element', 'laydate'], function(){
     /**
      * 通用日期时间选择
      */
-    $('.datetime').on('click', function () {
-        laydate({
-            elem: this,
-            istime: true,
-            format: 'YYYY-MM-DD hh:mm:ss'
-        })
+    laydate.render({
+        elem: '#datetime',
+        type: 'datetime'
     });
 
     //全选

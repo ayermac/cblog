@@ -2,7 +2,7 @@
  * Created by Jason on 2017/7/2.
  */
 layui.use('form', function(){
-    var form = layui.form()
+    var form = layui.form
         ,layer = layui.layer;
 
     //监听登录

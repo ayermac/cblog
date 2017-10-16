@@ -1,0 +1,68 @@
+.float-right{float: right;}
+.panel-body .layui-btn, .panel-body .layui-btn+.layui-btn { margin: 2px 2px; }
+.list-sort-input{
+    width: 50px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 14px;
+    padding: 2px;
+    border: 1px solid #e6e6e6;
+}
+.layui-content-box{padding: 25px 30px 20px 0;width: 90%}
+.layui-form-switch{width: 53px;margin-top: 1px;}
+.layui-form-switch i{top: 2px;}
+/*.layui-form-checkbox{margin-top: 10px;}*/
+.layui-form label{ color: #000;}
+.progress-container{max-width: 300px; max-height: 300px;}
+#footer {z-index:0}
+
+@media (max-width: 470px) {
+    .mobile-table{display: none}
+}
+
+/*头像*/
+.avatar-upload {
+    position: relative;
+    background: #e2e2e2;
+}
+.avatar-upload, .avatar-upload img {
+    width: 200px;
+    height: 200px;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+.avatar-upload .avatar-upbar {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -18px 0 0 -56px;
+}
+.avatar-upload .layui-upload-button {
+    background-color: rgba(0,0,0,.2);
+    color: rgba(255,255,255,1);
+}
+
+/*缩略图*/
+.thumb-upload {
+    position: relative;
+    /*background: #e2e2e2;*/
+}
+.thumb-upload, .thumb-upload img {
+    width: 100%;
+    height: 160px;
+    margin-top: 10px;
+}
+
+.thumb-upload .thumb-upbar {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -10px 0 0 -35px;
+}
+.thumb-upload .layui-btn {
+    background-color: rgba(0,0,0,.2);
+    color: rgba(255,255,255,1);
+}
+
+.note-editor .panel-heading{height: 1%;}
