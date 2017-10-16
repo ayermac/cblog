@@ -71,9 +71,10 @@ class Article extends Model{
      */
     protected function getContentAttr($value)
     {
+        $value = htmlspecialchars_decode($value);
         if ($this->getAttr('editor_type') == 'markdown') {
             $value = $this->parsedown->text($value);
         }
-        return $this->purifier->purify(htmlspecialchars_decode($value));
+        return $this->purifier->purify($value);
     }
 }
