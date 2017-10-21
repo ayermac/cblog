@@ -117,4 +117,11 @@ pre {
 }
 /*-----------------------------*/
 
+/*块引用*/
+blockquote {
+    border-left: 3px solid #cbd6e3;
+    padding: 10px 20px;
+    margin: 0 0 20px;
+}
+
 .uk-margin-center { text-align: center; }
